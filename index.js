@@ -4,7 +4,7 @@ const app = express()
 const bodyparser = require("body-parser")
 const path = require("path")
 
-const { check, validationResult } = require("express-validator/check")
+const { check, validationResult } = require("express-validator")
 
 const port = process.env.port || 3000
 
