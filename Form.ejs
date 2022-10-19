@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Express Form</title>
+  <style>
+    .info{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+    input{
+      margin: 0.5rem;
+      padding: 0.7rem;
+    }
+  </style>
+</head>
+<body>
+  <form action="validate" method="POST">
+    <div class="info">
+      <h1>Express Form Validation</h1>
+      <input class="title" type="text" name="title" placeholder="Title">
+      <input type="text" name="questions" placeholder="Questions">
+      <input type="text" name="members" placeholder="Members">
+      <input type="text" name="channel" placeholder="Channel">
+      <input type="submit" value="Submit Form">
+  </form>
+</body>
+</html>
