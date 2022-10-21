@@ -4,7 +4,7 @@ const app = express()
 const bodyparser = require("body-parser")
 const path = require("path")
 
-const { check, validationResult } = require("express-validator")
+const { body, validationResult } = require("express-validator")
 
 const port = process.env.port || 3000
 
@@ -21,21 +21,23 @@ app.get("/", function (req, res) {
     res.render("Form")
 })
 
-app.post("/validate", [
-    check("title", "titile shuld have length").isLength({ min: 5, max: 20 }),
-    check("questions", "question should not be empty").not().isEmpty(),
-    check("members", "members should have length").isLength({ min: 5, max: 20 }),
-    check("channel", "channel should not be empty").not().isEmpty(),
-] 
+const validateStandup = [
+    body("title", "titile shuld have length").isLength({ min: 5, max: 20 }),
+    body("questions", "question should not be empty").not().isEmpty(),
+    body("channel", "channel should not be empty").not().isEmpty(),
+    body("members", "members should have length").isLength({ min: 5, max: 20 }),
+]
+
+app.post("/validate", [validateStandup]
 ), (req, res) => {
     const errors = validationResult(req)
     console.log("Hello");
 
     if (!errors.isEmpty()) {
-       return res.status(404).json(errors)
+        return res.status(404).json(errors)
     }
     else {
-        res.send("Form Validated Successfully")
+        res.status(200).send("Form Validated Successfully")
     }
 }
 
@@ -43,3 +45,11 @@ app.listen(port, function (error) {
     if (error) throw error
     console.log("Server", port)
 })
+
+// app.post("/validate", (req,res) => {
+// res.send("Hello")
+// })
+
+// app.listen(port, () => {
+//     console.log(`App listening to port ${port}`);
+// })
