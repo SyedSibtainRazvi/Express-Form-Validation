@@ -22,13 +22,13 @@ app.get("/", function (req, res) {
 });
 
 const validateStandup = [
-  body("title", "titile shuld have length").isLength({ min: 5, max: 20 }),
+  body("title", "titile shuld have length").notEmpty(),
   body("questions", "question should not be empty").not().isEmpty(),
   body("channel", "channel should not be empty").not().isEmpty(),
   body("members", "members should have length").isLength({ min: 5, max: 20 }),
 ];
 
-app.post("/validate", [validateStandup]),
+app.post("/validate", validateStandup,
   (req, res) => {
     const errors = validationResult(req);
 
@@ -37,7 +37,7 @@ app.post("/validate", [validateStandup]),
     } else {
       res.status(200).send("Form Validated Successfully");
     }
-  };
+  });
 
 app.listen(port, function (error) {
   if (error) throw error;
